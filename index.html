@@ -24,10 +24,10 @@
   </style>
 </head>
 <body>
-  <button onclick="openLogin()">Abrir Sistema</button>
+  <iframe id="app-frame"></iframe>
 
   <script>
-    // Função para abrir o sistema em uma nova janela
+    // Função para abrir o login em uma nova janela
     function openLogin() {
       const loginWindow = window.open('https://test.retaguarda.app/testesturubia/', 'Login', 'width=1024,height=768');
 
@@ -35,10 +35,14 @@
       const checkLogin = setInterval(() => {
         if (loginWindow.closed) {
           clearInterval(checkLogin);
-          alert('Login concluído. Você pode continuar usando o sistema.');
+          // Redirecionar o iFrame para a URL desejada após o login
+          document.getElementById('app-frame').src = 'https://test.retaguarda.app/testesturubia/sistema';
         }
       }, 500);
     }
+
+    // Abrir o login automaticamente ao carregar a página
+    openLogin();
   </script>
 </body>
 </html>
