@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PWA com iFrame</title>
+  <title>PWA com Nova Janela</title>
   <link rel="manifest" href="/manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="PWA iFrame">
+  <meta name="apple-mobile-web-app-title" content="PWA Nova Janela">
   <link rel="apple-touch-icon" href="/icon-192x192.png">
   <style>
     body, html {
@@ -24,25 +24,21 @@
   </style>
 </head>
 <body>
-  <iframe id="app-frame"></iframe>
+  <button onclick="openLogin()">Abrir Sistema</button>
 
   <script>
-    // Função para abrir o login em uma nova janela
+    // Função para abrir o sistema em uma nova janela
     function openLogin() {
-      const loginWindow = window.open('https://test.retaguarda.app/testesturubia/', 'Login', 'width=500,height=600');
+      const loginWindow = window.open('https://test.retaguarda.app/testesturubia/', 'Login', 'width=1024,height=768');
 
-      // Verificar se a janela de login foi fechada
+      // Verificar se a janela foi fechada
       const checkLogin = setInterval(() => {
         if (loginWindow.closed) {
           clearInterval(checkLogin);
-          // Redirecionar o iFrame para a URL desejada após o login
-          document.getElementById('app-frame').src = 'https://test.retaguarda.app/testesturubia/sistema';
+          alert('Login concluído. Você pode continuar usando o sistema.');
         }
       }, 500);
     }
-
-    // Abrir o login automaticamente ao carregar a página
-    openLogin();
   </script>
 </body>
 </html>
