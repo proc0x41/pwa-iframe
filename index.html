@@ -24,19 +24,25 @@
   </style>
 </head>
 <body>
-  <iframe id="app-frame" src="https://test.retaguarda.app/testesturubia/movcentral/saidas"></iframe>
+  <iframe id="app-frame"></iframe>
 
   <script>
-    // Registrar o Service Worker
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js')
-        .then((registration) => {
-          console.log('Service Worker registrado com sucesso:', registration);
-        })
-        .catch((error) => {
-          console.log('Falha ao registrar Service Worker:', error);
-        });
+    // Função para abrir o login em uma nova janela
+    function openLogin() {
+      const loginWindow = window.open('https://test.retaguarda.app/testesturubia/', 'Login', 'width=500,height=600');
+
+      // Verificar se a janela de login foi fechada
+      const checkLogin = setInterval(() => {
+        if (loginWindow.closed) {
+          clearInterval(checkLogin);
+          // Redirecionar o iFrame para a URL desejada após o login
+          document.getElementById('app-frame').src = 'https://test.retaguarda.app/testesturubia/sistema';
+        }
+      }, 500);
     }
+
+    // Abrir o login automaticamente ao carregar a página
+    openLogin();
   </script>
 </body>
 </html>
