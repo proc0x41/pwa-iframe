@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PWA com Nova Janela</title>
+  <title>PWA com iFrame</title>
   <link rel="manifest" href="/manifest.json">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="PWA Nova Janela">
+  <meta name="apple-mobile-web-app-title" content="PWA iFrame">
   <link rel="apple-touch-icon" href="/icon-192x192.png">
   <style>
     body, html {
@@ -24,20 +24,18 @@
   </style>
 </head>
 <body>
-  <button onclick="openLogin()">Abrir Sistema</button>
+  <iframe id="app-frame" src="https://test.retaguarda.app/testesturubia/movcentral/saidas"></iframe>
 
   <script>
-    // Função para abrir o sistema em uma nova janela
-    function openLogin() {
-      const loginWindow = window.open('https://test.retaguarda.app/testesturubia/', 'Login', 'width=1024,height=768');
-
-      // Verificar se a janela foi fechada
-      const checkLogin = setInterval(() => {
-        if (loginWindow.closed) {
-          clearInterval(checkLogin);
-          alert('Login concluído. Você pode continuar usando o sistema.');
-        }
-      }, 500);
+    // Registrar o Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then((registration) => {
+          console.log('Service Worker registrado com sucesso:', registration);
+        })
+        .catch((error) => {
+          console.log('Falha ao registrar Service Worker:', error);
+        });
     }
   </script>
 </body>
